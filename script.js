@@ -1,5 +1,7 @@
-//Global variables/element aliases
+//Element alias
 const mainTile = $("#mainTile");
+
+//Array of portfolio content
 const portfolioArray = [
    {
       src: "Assets/Art_Tracker_App.jpg",
@@ -19,6 +21,7 @@ const portfolioArray = [
    }
 ]
 
+//Array of project links for populating buttons
 const projectLinkArr = [
    {
       name: "Art Tracking App",
@@ -87,7 +90,7 @@ function drawPortfolio() {
 
    }
 
-   //Empty and redraw nav buttons
+   //Redraw nav buttons
    $("#navigation").empty();
 
    let aboutBtn = $("<button>").addClass("button is-link is-fullwidth mb-4").attr("id", "aboutBtn").text("About me");
@@ -109,7 +112,7 @@ function drawPortfolio() {
 
 }
 
-//Function for redrawing page when 'contact' button is clicked
+//Function for updating page when 'contact' button is clicked
 function drawContactForm() {
 
    //Empty contents of main tile to replace with portfolio cards
@@ -120,13 +123,13 @@ function drawContactForm() {
    mainTile.append(contactTitle);
 
    //Construct form elements
-   //Note: form elements don't actually save and get submitted anywhere yet
+   //Note: form elements don't actually save and get submitted anywhere on submit yet
 
    //Contact name field
    let contactName = $("<div>").addClass("field").attr("id", "contactName");
    mainTile.append(contactName);
 
-   let nameLabel = $("<label>").addClass("label").text("Your name:");
+   let nameLabel = $("<label>").addClass("label has-text-grey-light").text("Your name:");
    $("#contactName").append(nameLabel);
 
    let nameControl = $("<div>").addClass("control").attr("id", "nameControl");
@@ -139,7 +142,7 @@ function drawContactForm() {
    let emailAddress = $("<div>").addClass("field").attr("id", "emailAddress");
    mainTile.append(emailAddress);
 
-   let emailLabel = $("<label>").addClass("label").text("Email address:");
+   let emailLabel = $("<label>").addClass("label has-text-grey-light").text("Email address:");
    $("#emailAddress").append(emailLabel);
 
    let emailControl = $("<div>").addClass("control").attr("id", "emailControl");
@@ -152,7 +155,7 @@ function drawContactForm() {
    let message = $("<div>").addClass("field").attr("id", "message");
    mainTile.append(message);
 
-   let messageLabel = $("<label>").addClass("label").text("Message:");
+   let messageLabel = $("<label>").addClass("label has-text-grey-light").text("Message:");
    $("#message").append(messageLabel);
 
    let messageControl = $("<div>").addClass("control").attr("id", "messageControl");
@@ -168,17 +171,60 @@ function drawContactForm() {
    let submitControl = $("<div>").addClass("control").attr("id", "submitControl");
    $("#actionButtons").append(submitControl);
 
-   let submitBtn = $("<button>").addClass("button is-success").text("Submit!");
+   //Eventually: add form validation to disable button until valid input is received on all form fields
+   let submitBtn = $("<button>").addClass("button is-success modal-button").attr("id", "contactSubmit").attr("data-target", "#modal-conf").attr("aria-haspopup", "true").text("Submit!");
    $("#submitControl").append(submitBtn);
 
    let cancelControl = $("<div>").addClass("control").attr("id", "cancelControl");
    $("#actionButtons").append(cancelControl);
 
+   //Eventually: add functionality to clear form fields if not null on click; maybe just change to a 'reset' button instead?
    let cancelBtn = $("<button>").addClass("button is-light").text("Cancel");
    $("#cancelControl").append(cancelBtn);
 
 
-   //Empty and redraw nav buttons
+   //Confirmation dialog content
+   let confDialog = $("<div>").addClass("modal").attr("id", "modal-conf");
+   mainTile.append(confDialog);
+
+   let modalBkgd = $("<div>").addClass("modal-background");
+   $("#modal-conf").append(modalBkgd);
+
+   let modalCard = $("<div>").addClass("modal-card my-6");
+   $(".modal-background").append(modalCard);
+
+   let modalHeader = $("<header>").addClass("modal-card-head has-background-grey");
+   $(".modal-card").append(modalHeader);
+
+   let modalHeadContent = $("<p>").addClass("modal-card-title has-text-danger-dark").text("Inquiry Failed!");
+   $(".modal-card-head").append(modalHeadContent);
+
+   let modalBody = $("<section>").addClass("modal-card-body has-background-grey-light has-text-grey-dark").text("Oh no! Your inquiry has NOT been received! Something went wrong here - please email directly at bivajef806@wedbo.net");
+   $(".modal-card").append(modalBody);
+
+   let modalFoot = $("<footer>").addClass("modal-card-foot has-background-grey");
+   $(".modal-card").append(modalFoot);
+
+   let modalAck = $("<button>").addClass("button is-success").attr("id", "modalAck").text("Got it!");
+   $(".modal-card-foot").append(modalAck);
+
+   //Event listener to close modal
+   $("#modalAck").click(function(event) {
+      event.preventDefault();
+      $(".modal").removeClass("is-active");
+   })
+
+   //Event listener for form submit button
+   $("#contactSubmit").click(function(event)  {
+      event.preventDefault();
+
+      //Store form data to a contact object on server, once knowledge of storing stuff to a server is obtained, and/or stick data into an email and send to self once knowledge of how to tie in an email service like Postmark is obtained
+
+      //Show confirmation dialog/modal
+      $(".modal").addClass("is-active");
+   })
+
+   //Redraw nav buttons
    $("#navigation").empty();
 
    let aboutBtn = $("<button>").addClass("button is-link is-fullwidth mb-4").attr("id", "aboutBtn").text("About me");
@@ -203,21 +249,26 @@ function drawContactForm() {
 //Function for drawing 'About me' and redrawing when button is clicked
 function drawAboutMe() {
    
+   //Empty contents of main tile to replace with about me content 
    mainTile.empty();
    
+   //Insert title text
    let aboutMeTitle = $("<p>").addClass("title has-text-grey-light").attr("id", "aboutMeTitle").text("About me");
    mainTile.append(aboutMeTitle);
 
+   //Insert first paragraph of about me content
    let contentP1 = $("<p>").text("My name is Justin McDonald and I am a student learning to be a web developer! Currently, I work in technology for a local sales enablement company called Primary Intelligence as a Product Manager. As a Product Manager, I oversee the design and implementation of roughly 40% of our (very large) proprietary web app, TruVoice, which is a robust dashboard and analytics tool we built to support the service we provide to our clients.");
    mainTile.append(contentP1).append("<br>");
 
+   //Insert second paragraph of about me content
    let contentP2 = $("<p>").text("I decided to pursue learning web dev partly because I've always been interested in coding, partially because I feel it's the logical next step in my career path, and partially because I'm hoping to stay with my company and join the dev team to do the actual coding of our system, instead of just speccing the logic for it. But at the very least, the knowledge from this class will benefit my role as Product Manager too, having a deeper understanding of the underlying technologies that are used to implement the features I design.");
    mainTile.append(contentP2).append("<br>");
 
-   let contentP3 = $("<p>").text("Now that I have progressed through the web dev bootcamp a ways, I am updating this portfolio page to showcase some of the skills I've learned thus far. Feel free to poke around and check out some of the improvements I've managed to work in outside the obvious UI changes!");
+   //Insert third paragraph of about me content
+   let contentP3 = $("<p>").text("Now that I have progressed through the web dev bootcamp a ways, I am updating this portfolio page to showcase some of the skills I've learned thus far. Feel free to poke around and check out some of the improvements I've managed to work in outside the obvious UI changes! To see some of the projects I've completed as part of the course, the buttons below will take you to the most recent projects!");
    mainTile.append(contentP3);
 
-   //Project link buttons
+   //Add project link buttons
    let projectBtns = $("<div>").addClass("buttons are-medium is-grouped is-justify-content-center my-6").attr("id", "projectBtns");
    mainTile.append(projectBtns);
 
@@ -227,7 +278,7 @@ function drawAboutMe() {
       $("#projectBtns").append(link);
    }
 
-   //Empty and redraw nav buttons
+   //Redraw nav buttons
    $("#navigation").empty();
 
    let portfolioBtn = $("<button>").addClass("button is-link is-fullwidth mb-4").attr("id", "portfolioBtn").text("My portfolio");
