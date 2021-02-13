@@ -29,7 +29,7 @@ const portfolioArray = [
       src: "https://jmcdonald112358.github.io/Code-Quiz/",
       repo: "https://github.com/jmcdonald112358/Code-Quiz",
       img: "Assets/Code_Quiz.jpg",
-      desc: "This application was built for another homework assignment relating to manipulating the DOM to dynamically generate content with JavaScript, as well as storing some more basic local storage concepts. It was the first \"real\" project given as homework in my coding bootcamp intended to incorporate knowledge spanning all three main elements of a webpage (HTML, CSS (Bootstrap), and JavaScript)."
+      desc: "This application was built for another homework assignment relating to manipulating the DOM to dynamically generate content with JavaScript, as well as using some basic local storage concepts. It was the first \"real\" project given as homework in my coding bootcamp intended to incorporate knowledge spanning all three main elements of a webpage (HTML, CSS (Bootstrap), and JavaScript)."
    }
 ]
 
@@ -283,7 +283,7 @@ function drawAboutMe() {
    mainTile.append(contentP2).append("<br>");
 
    //Insert third paragraph of about me content
-   let contentP3 = $("<p>").text("Now that I have progressed through the web dev bootcamp a ways, I am updating this portfolio page to showcase some of the skills I've learned thus far. Feel free to poke around and check out some of the improvements I've managed to work in outside the obvious UI changes! To see some of the projects I've completed as part of the course, the buttons below will take you to the most recent projects!");
+   let contentP3 = $("<p>").text("Now that I have progressed through the web dev bootcamp a ways, I am updating this portfolio page to showcase some of the skills I've learned thus far. Feel free to poke around and check out some of the improvements I've managed to work in outside the obvious UI changes! To see some of the projects I've completed as part of the course, check out my portfolio by clicking the button on the left!");
    mainTile.append(contentP3);
 
 
