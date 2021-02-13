@@ -4,46 +4,50 @@ const mainTile = $("#mainTile");
 //Array of portfolio content
 const portfolioArray = [
    {
-      src: "Assets/Art_Tracker_App.jpg",
+      name: "Art Tracking App",
+      src: "https://jmcdonald112358.github.io/Art-tracking-app/",
+      repo: "https://github.com/jmcdonald112358/Art-tracking-app",
+      img: "Assets/Art_Tracker_App.jpg",
       desc: "This application was the first group project I worked on in my coding bootcamp. The concept is to provide a user with a way to look up an artist's works across multiple galleries without having to filter through the \"fluff\" of a full-scope search engine. My primary contribution was the component populating results from The Metropolitan Museum."
    },
    {
-      src: "Assets/Weather_Dashboard.jpg",
+      name: "Weather Dashboard",
+      src: "https://jmcdonald112358.github.io/Weather-Dashboard/",
+      repo: "https://github.com/jmcdonald112358/Weather-Dashboard",
+      img: "Assets/Weather_Dashboard.jpg",
       desc: "This application was built as part of a homework assignment relating to using API calls. It is a simple weather dashboard app that takes a queried city and populates the current conditions and 5-day forecast for that city, while remembering recent searches for quick access in the future."
    },
    {
-      src: "Assets/Scheduler_App.jpg",
+      name: "Work Day Scheduler",
+      src: "https://jmcdonald112358.github.io/Work-Day-Scheduler/",
+      repo: "https://github.com/jmcdonald112358/Work-Day-Scheduler",
+      img: "Assets/Scheduler_App.jpg",
       desc: "This application was built for another homework assignment relating to utilizing local storage with user inputs and modifying those inputs. I incorporated additional functionality for resetting the schedule, as well as disabling the ability to add a task for an hour that has already passed."
    },
    {
-      src: "Assets/Code_Quiz.jpg",
+      name: "Code Quiz",
+      src: "https://jmcdonald112358.github.io/Code-Quiz/",
+      repo: "https://github.com/jmcdonald112358/Code-Quiz",
+      img: "Assets/Code_Quiz.jpg",
       desc: "This application was built for another homework assignment relating to manipulating the DOM to dynamically generate content with JavaScript, as well as storing some more basic local storage concepts. It was the first \"real\" project given as homework in my coding bootcamp intended to incorporate knowledge spanning all three main elements of a webpage (HTML, CSS (Bootstrap), and JavaScript)."
    }
 ]
 
 //Array of project links for populating buttons
-const projectLinkArr = [
-   {
-      name: "Art Tracking App",
-      src: "https://jmcdonald112358.github.io/Art-tracking-app/",
-      id: "artTracker",
-   },
-   {
-      name: "Weather Dashboard",
-      src: "https://jmcdonald112358.github.io/Weather-Dashboard/",
-      id: "weatherApp",
-   },
-   {
-      name: "Work Day Scheduler",
-      src: "https://jmcdonald112358.github.io/Work-Day-Scheduler/",
-      id: "schedulerApp",
-   },
-   {
-      name: "Code Quiz",
-      src: "https://jmcdonald112358.github.io/Code-Quiz/",
-      id: "codeQuiz",
-   }
-]
+// const projectLinkArr = [
+//    {
+//       id: "artTracker",
+//    },
+//    {
+//       id: "weatherApp",
+//    },
+//    {
+//       id: "schedulerApp",
+//    },
+//    {
+//       id: "codeQuiz",
+//    }
+// ]
 
 //Function for redrawing page when 'portfolio' button is clicked
 function drawPortfolio() {
@@ -80,13 +84,27 @@ function drawPortfolio() {
       $("#card" + i).append(cardImage);
       let portfolioImage = $("<figure>").addClass("image is-3by3").attr("id", "image" + i);
       $("#cardImage" + i).append(portfolioImage);
-      let imageObj = $("<img>").attr("src", portfolioArray[i].src);
+      let imageObj = $("<img>").attr("src", portfolioArray[i].img);
       $("#image" + i).append(imageObj);
 
       let cardContent = $("<div>").addClass("card-content").attr("id", "cardContent" + i);
       $("#card" + i).append(cardContent);
+
+      let cardTitle = $("<div>").addClass("subtitle has-text-light").attr("id", "title" + i).text(portfolioArray[i].name);
+      $("#cardContent" + i).append(cardTitle);
+
       let content = $("<div>").addClass("content has-text-light").attr("id", "content" + i).text(portfolioArray[i].desc);
       $("#cardContent" + i).append(content);
+
+      //Add project link buttons
+      let projectBtns = $("<div>").addClass("buttons are-small is-grouped is-justify-content-center mt-5").attr("id", "projectBtns" + i);
+      $("#content" + i).append(projectBtns);
+
+      let deployedLink = $("<a>").addClass("button is-rounded is-primary mx-3").attr("href", portfolioArray[i].src).attr("target", "_blank").text("View project");
+      $("#projectBtns" + i).append(deployedLink);
+
+      let repoLink = $("<a>").addClass("button is-rounded is-info mx-3").attr("href", portfolioArray[i].repo).attr("target", "_blank").text("View repo");
+      $("#projectBtns" + i).append(repoLink); 
 
    }
 
@@ -199,7 +217,7 @@ function drawContactForm() {
    let modalHeadContent = $("<p>").addClass("modal-card-title has-text-danger-dark").text("Inquiry Failed!");
    $(".modal-card-head").append(modalHeadContent);
 
-   let modalBody = $("<section>").addClass("modal-card-body has-background-grey-light has-text-grey-dark").text("Oh no! Your inquiry has NOT been received! Something went wrong here - please email directly at bivajef806@wedbo.net");
+   let modalBody = $("<section>").addClass("modal-card-body has-background-grey-light has-text-grey-dark").text("Oh no! Your inquiry has NOT been received! Something went wrong here - please email directly at jmcdonald112358@gmail.com");
    $(".modal-card").append(modalBody);
 
    let modalFoot = $("<footer>").addClass("modal-card-foot has-background-grey");
@@ -268,15 +286,7 @@ function drawAboutMe() {
    let contentP3 = $("<p>").text("Now that I have progressed through the web dev bootcamp a ways, I am updating this portfolio page to showcase some of the skills I've learned thus far. Feel free to poke around and check out some of the improvements I've managed to work in outside the obvious UI changes! To see some of the projects I've completed as part of the course, the buttons below will take you to the most recent projects!");
    mainTile.append(contentP3);
 
-   //Add project link buttons
-   let projectBtns = $("<div>").addClass("buttons are-medium is-grouped is-justify-content-center my-6").attr("id", "projectBtns");
-   mainTile.append(projectBtns);
 
-   for (let i = 0; i < projectLinkArr.length; i++){
-      let link = $("<a>").addClass("button is-rounded is-primary mx-5").attr("href", projectLinkArr[i].src).attr("id", projectLinkArr[i].id).attr("target", "_blank").text(projectLinkArr[i].name);
-
-      $("#projectBtns").append(link);
-   }
 
    //Redraw nav buttons
    $("#navigation").empty();
