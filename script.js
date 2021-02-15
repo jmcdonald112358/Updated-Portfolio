@@ -33,22 +33,6 @@ const portfolioArray = [
    }
 ]
 
-//Array of project links for populating buttons
-// const projectLinkArr = [
-//    {
-//       id: "artTracker",
-//    },
-//    {
-//       id: "weatherApp",
-//    },
-//    {
-//       id: "schedulerApp",
-//    },
-//    {
-//       id: "codeQuiz",
-//    }
-// ]
-
 //Function for redrawing page when 'portfolio' button is clicked
 function drawPortfolio() {
 
